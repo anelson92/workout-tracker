@@ -10,17 +10,17 @@ const typeDefs = gql`
         password: String
         goals: [Goal]
         workouts: [Workout]
-        bodyWeight: Int
+        
     }
 
     type Goal {
         _id: ID
-        goalTitle: String 
+        title: String 
         description: String
-        dateCreated: String
+        date: String
         dueDate: String
         personalBest: String
-        bodyWeight: User
+        bodyWeight: Int
         workoutStreak: Int
         user: User
     }
@@ -41,10 +41,10 @@ const typeDefs = gql`
     }
 
     type Query {
-        users: [User]!
+        users: [User]
         user(_id: ID!): User
-        goals: Goal
-        
+        goals: [Goal]
+
     }
 
     type Mutation {
