@@ -1,0 +1,11 @@
+[
+    {
+        "title": "Workout Yeah!",
+        "description": "This is a workout description",
+        "dueDate": "2023-04-06T09:30:00.000Z",
+        "user": "60704f8a8d3c1f0db3b3a3b9",
+        "personalBest": "12",
+        "bodyWeight": 12,
+        "workoutStreak": 1
+    }
+]
