@@ -4,16 +4,35 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
     type User {
-        _id: ID 
+        _id: ID!
         username: String
         email: String
         password: String
         goals: [Goal]
         workouts: [Workout]
+        bodyWeight: Int
     }
 
     type Goal {
+        _id: ID
+        goalTitle: String 
+        description: String
+        dateCreated: String
+        dueDate: String
+        personalBest: String
+        bodyWeight: User
+        workoutStreak: Int
+        user: User
+    }
 
+    type Workout {
+        _id: ID!
+        exerciseType: String
+        dateCreated: String
+        reps: Int
+        sets: Int
+        progress: Int
+        user: User
     }
 
     type Auth {
@@ -24,6 +43,7 @@ const typeDefs = gql`
     type Query {
         users: [User]!
         user(_id: ID!): User
+        goals: Goal
         
     }
 
@@ -31,6 +51,8 @@ const typeDefs = gql`
         newUser(_id: ID!, username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         deleteUser(_id: ID!): User
-        addGoal()
+       
     }
 `
+
+module.exports = typeDefs;
