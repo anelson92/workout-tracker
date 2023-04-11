@@ -22,7 +22,7 @@ const goalSchema = new Schema({
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User" 
     },
     personalBest: {
         type: String,
@@ -37,6 +37,26 @@ const goalSchema = new Schema({
         required: false
     }
 });
+
+// possible virtuals 
+goalSchema
+    .virtual ('personalBestFormatted')
+    .get(function () {
+        if (this.personalBest) {
+        return `${this.personalBest}`;
+    }
+    return null;
+});
+
+workoutStreak
+    .virtual ('workoutStreakFormatted')
+    .get(function () {
+        if (this.workoutStreak) {
+            return `$(this.workoutStreak) days`;
+        }
+        return null;
+});
+    
 
 const Goal = mongoose.model('Goal', goalSchema);
 module.exports = {Goal};
