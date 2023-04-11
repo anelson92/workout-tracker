@@ -22,7 +22,7 @@ const goalSchema = new Schema({
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User" 
     },
     personalBest: {
         type: String,
