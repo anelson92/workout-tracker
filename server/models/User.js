@@ -1,4 +1,3 @@
-// username, password, email, phone number (for reminder texts, maybe)
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

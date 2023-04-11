@@ -1,16 +1,16 @@
-const mongoose = require('mongoose');
-const config = require('../config');
+// const mongoose = require('mongoose');
+// const config = require('../config/connection');
+const User = require('./User'); //is this the correct file path?
+const Goal = require('./Goal');
+const Workout = require('./Workout');
 
-mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const db = mongoose.connection;
+// mongoose.connect('mongodb://127.0.0.1:27017/workout-tracker');
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => console.log('Connected to MongoDB'));
+// const db = mongoose.connection;
 
-const User = require('./user'); //is this the correct file path?
-const Goal = require('./goal');
-const Workout = require('./workout');
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', () => console.log('Connected to MongoDB'));
 
 module.exports = {
   User,
