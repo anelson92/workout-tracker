@@ -3,24 +3,29 @@ import React, { useState } from 'react';
 import Dashboard from './pages/Dashboard';
 import HomePage from './pages/Homepage';
 import Login from './pages/Login'; 
+import Navbar from './components/Navbar'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('dashboard');
+  // const [currentPage, setCurrentPage] = useState('home');
   
-  const handleNavClick = (page) => {
-    setCurrentPage(page);
-  };
+  // const handleNavClick = (page) => {
+  //   setCurrentPage(page);
+  // };
+
+  const [currentPage, setCurrentPage] = useState('Home')
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+  }
+
   
   return (
     <div className="App">
-      <nav>
-        <button onClick={() => handleNavClick('dashboard')}>Dashboard</button>
-        <button onClick={() => handleNavClick('home')}>Home</button>
-        <button onClick={() => handleNavClick('login')}>Login</button>
-      </nav>
-      {currentPage === 'dashboard' && <Dashboard />}
-      {currentPage === 'home' && <HomePage />}
-      {currentPage === 'login' && <Login />}
+
+      <Navbar onPageChange={handlePageChange}></Navbar> 
+      {currentPage === 'Home' && <HomePage />}
+      {currentPage === 'Dashboard' && <Dashboard />}
+      {currentPage === 'Login' && <Login />}
     </div>
   );
 }

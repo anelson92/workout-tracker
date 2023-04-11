@@ -1,6 +1,8 @@
 // goals, workouts, *components for these*
 import React from "react";
 import { Link } from "react-router-dom";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const Dashboard = () => {
   const user = {
