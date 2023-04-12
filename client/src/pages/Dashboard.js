@@ -12,6 +12,10 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 const Dashboard = () => {
   const styles = {
+    // div: {
+    //   display: "flex",
+    // },
+
     dashStyles: {
       // display: "flex",
       // p: 6,
@@ -22,7 +26,7 @@ const Dashboard = () => {
       // margin: "0 auto",
       display: "flex",
       flexWrap: "wrap",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
       flexDirection: "column",
       alignItems: "center",
     },
@@ -71,7 +75,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div style={styles.dashStyles} className="dashboard">
+    <div style={styles.div} className="dashboard">
       <nav className="dashboard__nav">
         <List>
           <ListItem>
