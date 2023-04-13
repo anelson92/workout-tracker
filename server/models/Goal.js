@@ -12,12 +12,11 @@ const goalSchema = new Schema({
         required: true
     },
     dueDate: {
-        type: Date,
+        type: String,
         required: true
     },
     date: {
-        type: Date,
-        required: true,
+        type: String,
         default: Date.now
     },
     user: {
@@ -48,7 +47,7 @@ goalSchema
     return null;
 });
 
-workoutStreak
+goalSchema
     .virtual ('workoutStreakFormatted')
     .get(function () {
         if (this.workoutStreak) {
