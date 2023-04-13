@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models/User');
 const { Goal } = require('../models/Goal');
 const { Workout } = require('../models/Workout');
-const { signToken } = require('../utils/auth');
+// const { signToken } = require('../utils/auth');
 
 
 const resolvers = {
@@ -14,25 +14,26 @@ const resolvers = {
         },
 
         // find one user
-        user: async (parent, { userId}) => {
-            return User.findOne({ _id: userId });
+        user: async (parent, { id }) => {
+            return User.findOne({ _id: id });
         },
         // find the users' info that is logged in 
-        me: async (parent, args, context) => {
+        user: async (parent, args, context) => {
             if (context.user) {
                 return User.findOne({ _id: context.user._id });
             }
             throw new AuthenticationError('You must be logged in to do that!');
         },
+        
     },
 
     Mutation: {
         // create new user 
-        addUser: async (parent, { name, email, password, phoneNumber }) => {
-            const user = await User.create({ name, email, password, phoneNumber });
+        addUser: async (parent, args) => {
+            const user = await User.create({ args });
             const token = signToken(user);
 
-            return { token, user };
+            return { user, token };
         },
         // login
         login: async (parent, { email, password }) => {
@@ -96,31 +97,6 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in to do that!');
         },
 
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Query: {
-        goals: async () => {
-            return Goal.find();
-        }
     }
 }
 

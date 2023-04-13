@@ -8,8 +8,8 @@ const workoutSchema = new Schema({
         required: true
     },
     date: {
-        type: Date,
-        required: true,
+        type: String,
+        // required: true,
         default: Date.now
     },
     user: {
