@@ -12,23 +12,36 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 const Dashboard = () => {
   const styles = {
-    // div: {
-    //   display: "flex",
-    // },
-
     dashStyles: {
-      // display: "flex",
-      // p: 6,
-      // flexDirection: "column",
-      // // zIndex: "tooltip",
-      // justifyContent: "center",
-      // width: "100%",
-      // margin: "0 auto",
+      margin: "50px",
       display: "flex",
       flexWrap: "wrap",
-      justifyContent: "space-around",
-      flexDirection: "column",
-      alignItems: "center",
+      width: " 100%",
+      // justifyContent: "spaceAround",
+      // p: 6,
+      flexDirection: "row",
+      // // zIndex: "tooltip",
+      // justifyContent: "center",
+      // margin: "0 auto",
+      // flexWrap: "wrap",
+      // justifyContent: "space-around",
+      // alignItems: "center",
+    },
+
+    dashLeft: {
+      margin: "5px",
+      width: "45%",
+      height: "100vh",
+      // margin: "50px 25px 250px 30px",
+    },
+
+    dashRight: {
+      margin: "5px",
+      width: "45%",
+    },
+
+    dashRightItems: {
+      margin: "15px",
     },
 
     boxStyles: {
@@ -36,9 +49,10 @@ const Dashboard = () => {
       justifyContent: "space-around",
       // top: 40,
       // left: "40%",
-      border: 1,
-      borderColor: "blue",
-      borderRadius: 2,
+      border: "3px solid",
+      borderColor: "#1976d2",
+      borderRadius: "10px",
+      boxShadow: "0 0 5px 0",
     },
   };
 
@@ -75,19 +89,8 @@ const Dashboard = () => {
   ];
 
   return (
-    <div style={styles.div} className="dashboard">
-      <nav className="dashboard__nav">
-        <List>
-          <ListItem>
-            <Link to="/settings">Settings</Link>
-          </ListItem>
-          <ListItem>
-            <Link to="/profile">Profile</Link>
-          </ListItem>
-        </List>
-      </nav>
-
-      <div className="dashboard__user">
+    <div style={styles.dashStyles} className="dashboard__container">
+      <div style={styles.dashRight} className="dashboard__user">
         <Box sx={styles.boxStyles}>
           <img src={user.profilePicture} alt={user.name} />
           <h1>{user.name}</h1>
@@ -103,69 +106,77 @@ const Dashboard = () => {
         </Box>
       </div>
 
-      <div className="dashboard__goals">
-        <Box sx={styles.boxStyles}>
-          <h2>Goals Progress</h2>
-          <List>
-            {goals.map((goal, index) => (
-              <ListItem key={index}>
-                {goal.title}: {goal.progress}%
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </div>
+      <div style={styles.dashRight}>
+        <div style={styles.dashRightItems} className="dashboard__goals">
+          <Box sx={styles.boxStyles}>
+            <h2>Goals Progress</h2>
+            <List>
+              {goals.map((goal, index) => (
+                <ListItem key={index}>
+                  {goal.title}: {goal.progress}%
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </div>
 
-      <div className="dashboard__recent-activities">
-        <Box sx={styles.boxStyles}>
-          <h2>Recent Activities</h2>
-          <List>
-            {recentActivities.map((activity, index) => (
-              <ListItem key={index}>
-                {activity.type} - {activity.exercise}
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </div>
+        <div
+          style={styles.dashRightItems}
+          className="dashboard__recent-activities"
+        >
+          <Box sx={styles.boxStyles}>
+            <h2>Recent Activities</h2>
+            <List>
+              {recentActivities.map((activity, index) => (
+                <ListItem key={index}>
+                  {activity.type} - {activity.exercise}
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </div>
 
-      <div className="dashboard__motivation">
-        <Box sx={styles.boxStyles}>
-          <h2>Motivational Quotes or Tips</h2>
-          <p>
-            {
-              motivationalQuotes[
-                Math.floor(Math.random() * motivationalQuotes.length)
-              ]
-            }
-          </p>
-        </Box>
-      </div>
+        <div
+          style={styles.dashRightItems}
+          className="dashboard__social-sharing"
+        >
+          <Box sx={styles.boxStyles}>
+            <h2>Share your progress</h2>
+            <ul>
+              <FacebookIcon
+                type="button"
+                onClick={() => window.open("https://www.facebook.com/")}
+              >
+                Facebook
+              </FacebookIcon>
+              <TwitterIcon
+                type="button"
+                onClick={() => window.open("https://www.twitter.com/")}
+              >
+                Twitter
+              </TwitterIcon>
+              <InstagramIcon
+                type="button"
+                onClick={() => window.open("https://www.instagram.com/")}
+              >
+                Instagram
+              </InstagramIcon>
+            </ul>
+          </Box>
+        </div>
 
-      <div className="dashboard__social-sharing">
-        <Box sx={styles.boxStyles}>
-          <h2>Share your progress</h2>
-          <ul>
-            <FacebookIcon
-              type="button"
-              onClick={() => window.open("https://www.facebook.com/")}
-            >
-              Facebook
-            </FacebookIcon>
-            <TwitterIcon
-              type="button"
-              onClick={() => window.open("https://www.twitter.com/")}
-            >
-              Twitter
-            </TwitterIcon>
-            <InstagramIcon
-              type="button"
-              onClick={() => window.open("https://www.instagram.com/")}
-            >
-              Instagram
-            </InstagramIcon>
-          </ul>
-        </Box>
+        <div style={styles.dashRightItems} className="dashboard__motivation">
+          <Box sx={styles.boxStyles}>
+            <h2>Motivational Quotes or Tips</h2>
+            <p>
+              {
+                motivationalQuotes[
+                  Math.floor(Math.random() * motivationalQuotes.length)
+                ]
+              }
+            </p>
+          </Box>
+        </div>
       </div>
     </div>
   );

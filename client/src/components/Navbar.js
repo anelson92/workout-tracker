@@ -1,32 +1,35 @@
 import * as React from "react";
 import { Link, Route, Router } from "react-router-dom";
-// import AppBar from "@mui/material/AppBar";
-// import Box from "@mui/material/Box";
-// import Toolbar from "@mui/material/Toolbar";
-// import IconButton from "@mui/material/IconButton";
-// import Typography from "@mui/material/Typography";
 // import Menu from "@mui/material/Menu";
-// import MenuIcon from "@mui/icons-material/Menu";
 // import Container from "@mui/material/Container";
 // import Avatar from "@mui/material/Avatar";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-// import Button from "@mui/material/Button";
 // import Tooltip from "@mui/material/Tooltip";
 // import MenuItem from "@mui/material/MenuItem";
-// import AdbIcon from "@mui/icons-material/Adb";
-
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+// import Button from "@mui/material/Button";
+// import IconButton from "@mui/material/IconButton";
+// import MenuIcon from "@mui/icons-material/Menu";
 
 // const pages = ["Home", "Dashboard", "Login"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar(props) {
+  const styles = {
+    navStyles: {
+      // padding: "20px 35px",
+      display: "flex",
+      justifyContent: "spaceBetween",
+      // flexWrap: "wrap",
+      // position: "sticky",
+      // top: 0,
+      // right: 0,
+      width: "100%",
+    },
+  };
   // const [anchorElNav, setAnchorElNav] = React.useState(null);
   // const [anchorElUser, setAnchorElUser] = React.useState(null);
   // const [activatePage, setActivePage] = React.useState("home");
@@ -53,10 +56,11 @@ function Navbar(props) {
   // };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          {/* <IconButton
+    // <header style={styles.navStyles}>
+    // <Box sx={{ flexGrow: 1 }}>
+    <AppBar style={styles.navStyles} position="static">
+      <Toolbar disableGutters>
+        {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -65,22 +69,51 @@ function Navbar(props) {
           >
             <MenuIcon />
           </IconButton> */}
-          <FitnessCenterIcon
+        <FitnessCenterIcon
           //         onClick={() => handlePageChange("Home")}
-          //         sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-          />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Workout Tracker
-          </Typography>
-          <Box>
-            <Link to={"/"}>Home</Link>
-            <Link to={"dashboard"}>Dashboard</Link>
-            <Link to={"login"}>Login</Link>
-          </Box>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
+          // sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+        />
+        <Typography
+          variant="h6"
+          noWrap
+          component="a"
+          href="/"
+          sx={{
+            mr: 2,
+            display: { xs: "none", md: "flex" },
+            fontFamily: "monospace",
+            fontWeight: 700,
+            letterSpacing: ".3rem",
+            color: "inherit",
+            textDecoration: "none",
+          }}
+        >
+          Workout Tracker
+        </Typography>
+        <Box>
+          <Link to={"/"}>Home</Link>
+          <Link to={"dashboard"}>Dashboard</Link>
+          <Link to={"login"}>Login</Link>
+        </Box>
+        {/* <Button color="inherit">Login</Button> */}
+      </Toolbar>
+      {/* moved from dashboard for icon menu */}
+      {/* <List>
+          <ListItem>
+            <Link to="/settings">Settings</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/profile">Profile</Link>
+          </ListItem>
+        </List> */}
+    </AppBar>
+    // </Box>
+    // </header>
 
     // <AppBar position="static">
     //   <Container maxWidth="xl">

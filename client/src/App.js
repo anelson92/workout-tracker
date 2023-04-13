@@ -13,10 +13,18 @@ function App() {
   //   setCurrentPage(page);
   // };
 
+  const styles = {
+    navStyles: {
+      right: 0,
+      width: "100%",
+    },
+  };
+
   return (
     <div className="App">
       <Navbar
-      // onPageChange={handlePageChange}
+        styles={styles.navStyles}
+        // onPageChange={handlePageChange}
       ></Navbar>
       <Routes>
         <Route path="/" element={<Homepage />} />
