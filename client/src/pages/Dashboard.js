@@ -1,7 +1,6 @@
 // goals, workouts, *components for these*
 import React from "react";
 import { Link } from "react-router-dom";
-// import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -17,22 +16,13 @@ const Dashboard = () => {
       display: "flex",
       flexWrap: "wrap",
       width: " 100%",
-      // justifyContent: "spaceAround",
-      // p: 6,
       flexDirection: "row",
-      // // zIndex: "tooltip",
-      // justifyContent: "center",
-      // margin: "0 auto",
-      // flexWrap: "wrap",
-      // justifyContent: "space-around",
-      // alignItems: "center",
     },
 
     dashLeft: {
       margin: "5px",
       width: "45%",
       height: "100vh",
-      // margin: "50px 25px 250px 30px",
     },
 
     dashRight: {
@@ -47,8 +37,6 @@ const Dashboard = () => {
     boxStyles: {
       maxWidth: "sm",
       justifyContent: "space-around",
-      // top: 40,
-      // left: "40%",
       border: "3px solid",
       borderColor: "#1976d2",
       borderRadius: "10px",
