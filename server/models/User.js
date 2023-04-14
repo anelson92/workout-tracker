@@ -27,7 +27,19 @@ const userSchema = new Schema({
     phoneNumber: {
         type: String,
         // required: true
-    }
+    },
+    goals: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Goal'
+        }
+      ],
+      workouts: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Workout'
+        }
+      ]
 });
 
 // middleware to create password

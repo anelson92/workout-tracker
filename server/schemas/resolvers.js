@@ -2,7 +2,8 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models/User');
 const { Goal } = require('../models/Goal');
 const { Workout } = require('../models/Workout');
-// const { signToken } = require('../utils/auth');
+const { signToken } = require('../utils/auth');
+const { ObjectId } = require('mongodb');
 
 
 const resolvers = {
@@ -14,11 +15,13 @@ const resolvers = {
         },
 
         // find one user
-        user: async (parent, { id }) => {
-            return User.findOne({ _id: id });
+        oneUser: async (parent, {_id}) => {
+
+            console.log(_id)
+            return User.findOne({_id});
         },
         // find the users' info that is logged in 
-        user: async (parent, args, context) => {
+        userLoggedIn: async (parent, args, context) => {
             if (context.user) {
                 return User.findOne({ _id: context.user._id });
             }
@@ -30,11 +33,12 @@ const resolvers = {
     Mutation: {
         // create new user 
         addUser: async (parent, args) => {
-            const user = await User.create({ args });
+            const { username, email, password, phoneNumber, goals, workouts } = args;
+            const user = await User.create({ username, email, password, phoneNumber, goals, workouts });
             const token = signToken(user);
-
+          
             return { user, token };
-        },
+          },
         // login
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
@@ -43,7 +47,7 @@ const resolvers = {
                 throw new AuthenticationError('No user with that email!');
             }
 
-            const correctPw = await profile.isCorrectPassword(password);
+            const correctPw = await user.isCorrectPassword(password);
 
             if(!correctPw) {
                 throw new AuthenticationError('Incorrect password!');
@@ -53,13 +57,18 @@ const resolvers = {
             return { token, user };
         },
         // add goal, not sure about args?
-        addGoal: async (parent, { title, description, dueDate }, context) => {
+        addGoal: async (parent, args, context) => {
             if(context.user) {
-                return Goal.findOneAndUpdate(
-                    { _id: User },
-                    { $addToSet: { goals: Goal }},
-                    { new: true, runValidators: true }
-                )
+
+                const goal = await Goal.create({...args, username: context.user.username})
+
+                 await User.findByIdAndUpdate(
+                    {_id: context.user._id},
+                     {$push: {goals: goal._id}},
+                    {new: true, runValidators: true}
+                     )
+
+                return goal
             }
             throw new AuthenticationError('You need to be logged in to do that!');
         },
@@ -67,7 +76,7 @@ const resolvers = {
         removeGoal: async (parent, { id }, context) => {
             if (context.user) {
                 return Goal.findByIdAndDelete(
-                    { _id: id },
+                    { _id: context.user._id },
                     { $pull: { goals: Goal }},
                     { new: true }
                 )
@@ -78,7 +87,7 @@ const resolvers = {
         addWorkout: async (parent, { exerciseType, reps, sets, progress }, context) => {
             if(context.user) {
                 return Workout.findOneAndUpdate(
-                    { _id: id },
+                    { _id: context.user._id },
                     { $addToSet: { workouts: Workout }},
                     { new: true, runValidators: true }
                 )
@@ -89,7 +98,7 @@ const resolvers = {
         removeWorkout: async (parent, { id }, context) => {
             if (context.user) {
                 return Workout.findByIdAndDelete(
-                    { _id: id },
+                    { _id: context.user._id },
                     { $pull: { workouts: Workout }},
                     { new: true }
                 )
