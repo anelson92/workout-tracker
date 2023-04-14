@@ -19,10 +19,6 @@ const goalSchema = new Schema({
         type: String,
         default: Date.now
     },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: "User" 
-    },
     personalBest: {
         type: String,
         required: false
