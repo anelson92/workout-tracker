@@ -1,13 +1,14 @@
 // goals, workouts, *components for these*
 import React from "react";
-import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-// import Button from "@mui/material/Button";
+import profilePic from "../assets/thisguy.jpg";
+import IconButton from "@mui/material/IconButton";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import "../styles/dashboard.css";
 
 const Dashboard = () => {
   const styles = {
@@ -41,12 +42,35 @@ const Dashboard = () => {
       borderColor: "#1976d2",
       borderRadius: "10px",
       boxShadow: "0 0 5px 0",
+      backgroundColor: "white",
+    },
+
+    heroStyle: {
+      display: "flex",
+      margin: "auto",
+      padding: 0,
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "spaceBetween",
+    },
+
+    heroImage: {
+      objectFit: "cover",
+      maxWidth: "50%",
+      border: "1px solid #1976d2",
+      borderRadius: "5px",
+      boxShadow: "0 0 5px 0",
+    },
+
+    heroText: {
+      maxWidth: "50%",
     },
   };
 
   const user = {
     name: "John Doe",
-    profilePicture: "https://example.com/profile-picture.jpg",
+    profilePicture: profilePic,
     workoutsCompleted: 10,
     totalWeightLifted: 500,
     timeSpentExercising: 120,
@@ -80,17 +104,34 @@ const Dashboard = () => {
     <div style={styles.dashStyles} className="dashboard__container">
       <div style={styles.dashRight} className="dashboard__user">
         <Box sx={styles.boxStyles}>
-          <img src={user.profilePicture} alt={user.name} />
-          <h1>{user.name}</h1>
-          <List>
-            <ListItem>Workouts Completed: {user.workoutsCompleted}</ListItem>
-            <ListItem>
-              Total Weight Lifted: {user.totalWeightLifted} lbs
-            </ListItem>
-            <ListItem>
-              Time Spent Exercising: {user.timeSpentExercising} min
-            </ListItem>
-          </List>
+          <div style={styles.heroStyle}>
+            <img
+              src={user.profilePicture}
+              style={styles.heroImage}
+              alt={user.name}
+            />
+
+            {/* <div style={styles.heroImage}>
+              <img
+                src={user.profilePicture}
+                alt={user.name}
+              />
+            </div> */}
+            <div style={styles.heroText}>
+              <h1>{user.name}</h1>
+              <List>
+                <ListItem>
+                  Workouts Completed: {user.workoutsCompleted}
+                </ListItem>
+                <ListItem>
+                  Total Weight Lifted: {user.totalWeightLifted} lbs
+                </ListItem>
+                <ListItem>
+                  Time Spent Exercising: {user.timeSpentExercising} min
+                </ListItem>
+              </List>
+            </div>
+          </div>
         </Box>
       </div>
 
@@ -131,24 +172,24 @@ const Dashboard = () => {
           <Box sx={styles.boxStyles}>
             <h2>Share your progress</h2>
             <ul>
-              <FacebookIcon
-                type="button"
-                onClick={() => window.open("https://www.facebook.com/")}
-              >
-                Facebook
-              </FacebookIcon>
-              <TwitterIcon
-                type="button"
-                onClick={() => window.open("https://www.twitter.com/")}
-              >
-                Twitter
-              </TwitterIcon>
-              <InstagramIcon
-                type="button"
-                onClick={() => window.open("https://www.instagram.com/")}
-              >
-                Instagram
-              </InstagramIcon>
+              <IconButton aria-label="delete">
+                <FacebookIcon
+                  type="button"
+                  onClick={() => window.open("https://www.facebook.com/")}
+                />
+              </IconButton>
+              <IconButton aria-label="delete">
+                <TwitterIcon
+                  type="button"
+                  onClick={() => window.open("https://www.twitter.com/")}
+                />
+              </IconButton>
+              <IconButton aria-label="delete">
+                <InstagramIcon
+                  type="button"
+                  onClick={() => window.open("https://www.instagram.com/")}
+                />
+              </IconButton>
             </ul>
           </Box>
         </div>
