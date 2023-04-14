@@ -11,27 +11,36 @@ const goalSchema = new Schema({
         type: String,
         required: true
     },
-    dueDate: {
-        type: String,
-        required: true
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     },
     date: {
         type: String,
         default: Date.now
-    },
-    personalBest: {
-        type: String,
-        required: false
-    },
-    bodyWeight: {
-        type: Number,
-        required: false
-    },
-    workoutStreak: {
-        type: Number,
-        required: false
     }
 });
+
+/* 
+,
+    dueDate: {
+        type: String,
+        required: false
+    }
+,
+    // personalBest: {
+    //     type: String,
+    //     required: false
+    // },
+    // bodyWeight: {
+    //     type: Number,
+    //     required: false
+    // },
+    // workoutStreak: {
+    //     type: Number,
+    //     required: false
+    }
+*/
 
 // possible virtuals 
 goalSchema
