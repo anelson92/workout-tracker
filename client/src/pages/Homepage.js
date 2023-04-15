@@ -15,6 +15,7 @@ function HomePage() {
       <div className={styles["header-div-two"]}>
         <p>placeholder text lalalalalalalaalsadkl;jaslk;djas;ldkjasl;d</p>
       </div>
+
     </div>
   );
 }

@@ -51,7 +51,7 @@ function Navbar() {
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ m: 2 }}
+          sx={{ mr: 2 }}
         />
         <Typography
           variant="h6"

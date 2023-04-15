@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
         required: true
     },
@@ -20,14 +19,26 @@ const userSchema = new Schema({
         minLength: 8
     },
     date: {
-        type: Date,
-        required: true,
+        type: String,
+        // required: true,
         default: Date.now
     },
     phoneNumber: {
-        type: Number,
-        required: true
-    }
+        type: String,
+        // required: true
+    },
+    goals: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Goal'
+        }
+      ],
+      workouts: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Workout'
+        }
+      ]
 });
 
 // middleware to create password
@@ -45,5 +56,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 }
 
-const User = mongoose.model('User', userSchema);
-module.exports = {User};
+const User = model('User', userSchema);
+
+module.exports = User;

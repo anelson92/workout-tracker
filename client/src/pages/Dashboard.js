@@ -172,19 +172,19 @@ const Dashboard = () => {
           <Box sx={styles.boxStyles}>
             <h2>Share your progress</h2>
             <ul>
-              <IconButton aria-label="delete">
+              <IconButton>
                 <FacebookIcon
                   type="button"
                   onClick={() => window.open("https://www.facebook.com/")}
                 />
               </IconButton>
-              <IconButton aria-label="delete">
+              <IconButton>
                 <TwitterIcon
                   type="button"
                   onClick={() => window.open("https://www.twitter.com/")}
                 />
               </IconButton>
-              <IconButton aria-label="delete">
+              <IconButton>
                 <InstagramIcon
                   type="button"
                   onClick={() => window.open("https://www.instagram.com/")}

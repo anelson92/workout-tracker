@@ -11,32 +11,36 @@ const goalSchema = new Schema({
         type: String,
         required: true
     },
-    dueDate: {
-        type: Date,
-        required: true
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     },
     date: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: "User" 
-    },
-    personalBest: {
         type: String,
-        required: false
-    },
-    bodyWeight: {
-        type: Number,
-        required: false
-    },
-    workoutStreak: {
-        type: Number,
-        required: false
+        default: Date.now
     }
 });
+
+/* 
+,
+    dueDate: {
+        type: String,
+        required: false
+    }
+,
+    // personalBest: {
+    //     type: String,
+    //     required: false
+    // },
+    // bodyWeight: {
+    //     type: Number,
+    //     required: false
+    // },
+    // workoutStreak: {
+    //     type: Number,
+    //     required: false
+    }
+*/
 
 // possible virtuals 
 goalSchema
@@ -48,7 +52,7 @@ goalSchema
     return null;
 });
 
-workoutStreak
+goalSchema
     .virtual ('workoutStreakFormatted')
     .get(function () {
         if (this.workoutStreak) {
