@@ -1,31 +1,5 @@
 // log in credentials
-import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
-
-import Auth from '../utils/auth';
-
-
-const styles = {
-  formStyles: {
-    alignItems: "center",
-    flexWrap: "wrap",
-    width: "20%",
-    padding: "8px 15px",
-    margin: "auto",
-    marginTop: "50px",
-    display: "flex",
-    justifyContent: "space-around",
-    boxSizing: "borderBox",
-    border: "3px solid",
-    borderColor: "#1976d2",
-    borderRadius: "5px",
-    boxShadow: "0 0 5px 0",
-    backgroundColor: "white",
-  },
+import React, { useState } from 'react';
 
   inputStyles: {
     border: "1px solid",

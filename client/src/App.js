@@ -1,4 +1,3 @@
-
 import "./App.css";
 import React, { useState } from "react";
 import { ApolloClient, 
@@ -38,6 +37,7 @@ const client = new ApolloClient({
 
 
 function App() {
+<<<<<<< HEAD
 
   return (
     <ApolloProvider client={client}>
@@ -56,6 +56,17 @@ function App() {
       </div>
       
     </ApolloProvider>
+=======
+  return (
+    <div className="App">
+      <Navbar></Navbar>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </div>
+>>>>>>> main
   );
 }
 export default App;

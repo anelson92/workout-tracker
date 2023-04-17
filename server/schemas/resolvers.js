@@ -1,9 +1,8 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models/User');
+const User = require('../models/User')
 const { Goal } = require('../models/Goal');
 const { Workout } = require('../models/Workout');
 const { signToken } = require('../utils/auth');
-const { ObjectId } = require('mongodb');
 
 
 const resolvers = {
@@ -13,20 +12,18 @@ const resolvers = {
         users: async () => {
             return User.find();
         },
-
         // find one user
         oneUser: async (parent, {_id}) => {
-
             console.log(_id)
             return User.findOne({_id});
         },
         // find the users' info that is logged in 
-        userLoggedIn: async (parent, args, context) => {
+        me: async (parent, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id });
+              return User.findOne({ _id: context.user._id });
             }
-            throw new AuthenticationError('You must be logged in to do that!');
-        },
+            throw new AuthenticationError('You need to be logged in!');
+      },
         
     },
 
@@ -34,7 +31,7 @@ const resolvers = {
         // create new user 
         addUser: async (parent, args) => {
             const { username, email, password, phoneNumber, goals, workouts } = args;
-            const user = await User.create({ username, email, password, phoneNumber, goals, workouts });
+            const user = await User.create({username, email, password, phoneNumber, goals, workouts});
             const token = signToken(user);
           
             return { user, token };
@@ -56,52 +53,38 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        // add goal, not sure about args?
-        addGoal: async (parent, args, context) => {
-            if(context.user) {
+        logout: async (parent, args, context) => {
 
-                const goal = await Goal.create({...args, username: context.user.username})
-
-                 await User.findByIdAndUpdate(
-                    {_id: context.user._id},
-                     {$push: {goals: goal._id}},
-                    {new: true, runValidators: true}
-                     )
-
-                return goal
-            }
-            throw new AuthenticationError('You need to be logged in to do that!');
         },
+        addNewGoal: async (parent, { userId, title, description }, context) => {
+            // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
+            if (context.user) {
+              const newGoal = await Goal.create({userId, title, description})
+              return newGoal;
+            }
+            // If user attempts to execute this mutation and isn't logged in, throw an error
+            throw new AuthenticationError('You need to be logged in!');
+          },
+
         // remove goal
-        removeGoal: async (parent, { id }, context) => {
+        removeGoal: async (parent, { _id }, context) => {
             if (context.user) {
-                return Goal.findByIdAndDelete(
-                    { _id: context.user._id },
-                    { $pull: { goals: Goal }},
-                    { new: true }
-                )
+                const removeGoal = await Goal.findOneAndRemove({_id: _id})
+                return removeGoal
             }
             throw new AuthenticationError('You need to be logged in to do that!');
         },
-        // add workout
-        addWorkout: async (parent, { exerciseType, reps, sets, progress }, context) => {
-            if(context.user) {
-                return Workout.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: { workouts: Workout }},
-                    { new: true, runValidators: true }
-                )
-            }
-            throw new AuthenticationError('You need to be logged in to do that!');
-        },
-        // remove workout 
-        removeWorkout: async (parent, { id }, context) => {
+        addWorkout: async (parent, { userId, title, description, type }, context) => {
             if (context.user) {
-                return Workout.findByIdAndDelete(
-                    { _id: context.user._id },
-                    { $pull: { workouts: Workout }},
-                    { new: true }
-                )
+              const newWorkout = await Workout.create({userId, title, description, type})
+              return newWorkout;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+          },
+        removeWorkout: async (parent, { _id }, context) => {
+            if (context.user) {
+                const removeWorkout = await Workout.findOneAndRemove({_id: _id})
+                return removeWorkout
             }
             throw new AuthenticationError('You need to be logged in to do that!');
         },

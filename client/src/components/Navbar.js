@@ -13,6 +13,21 @@ function Navbar({isLoggedIn}) {
       justifyContent: "spaceBetween",
       width: "100%",
     },
+
+    linkBox: {
+      margin: 10,
+      textDecoration: "none",
+      padding: "10px 15px",
+      fontSize: "1.55vw",
+      display: "flex",
+
+      alignItems: "center",
+    },
+
+    linkStyles: {
+      margin: 10,
+      color: "white",
+    },
   };
 
   return (
@@ -44,30 +59,43 @@ function Navbar({isLoggedIn}) {
           component="a"
           href="/"
           sx={{
-            mr: 2,
-            display: { xs: "none", md: "flex" },
+            mr: 10,
+            display: { md: "flex" },
             fontFamily: "monospace",
             fontWeight: 700,
-            letterSpacing: ".3rem",
+            fontSize: 35,
+            letterSpacing: ".2rem",
             color: "inherit",
             textDecoration: "none",
           }}
         >
           Workout Tracker
         </Typography>
-        <Box>
-          <Link to={"/"}>Home</Link>
-          {isLoggedIn ? (
-            <>
-            <Link to={"dashboard"}>Dashboard</Link>
-            <Link to={"logout"}>Logout</Link>
-            </>            
-          ) : (
-            <>
-              <Link to={"login"}>Login</Link>
-              <Link to={"signup"}>Sign Up</Link>
-            </>
-          )}
+
+        <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}>
+          <Typography
+            sx={{
+              display: { xs: "flex", md: "flex" },
+              // fontFamily: "monospace",
+              fontWeight: 300,
+              fontSize: 20,
+              letterSpacing: ".1rem",
+              color: "inherit",
+              textAlign: "center",
+              textDecoration: "none",
+            }}
+          >
+            <Link style={styles.linkStyles} to={"/"}>
+              Home
+            </Link>
+            <Link style={styles.linkStyles} to={"dashboard"}>
+              Dashboard
+            </Link>
+            <Link style={styles.linkStyles} to={"login"}>
+              Login
+            </Link>
+          </Typography>
+
         </Box>
         
         {/* <Button color="inherit">Login</Button> */}
