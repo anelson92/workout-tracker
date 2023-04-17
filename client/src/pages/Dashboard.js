@@ -42,6 +42,20 @@ const Dashboard = () => {
       borderRadius: "10px",
       boxShadow: "0 0 5px 0",
     },
+    buttonStyles: {
+      width: "50%",
+      color: "white",
+      background: "#1976d2",
+      textAlign: "center",
+      padding: "15px 0",
+      fontSize: "18px",
+      border: "1px solid",
+      borderColor: "black",
+      borderRadius: "10px",
+      mouseOver: {
+        background: "#blue",
+      }
+    }
   };
 
   const user = {
@@ -53,9 +67,9 @@ const Dashboard = () => {
   };
 
   const goals = [
-    { title: "Lose Weight", progress: 50 },
-    { title: "Gain Strength", progress: 75 },
-    { title: "Run 5k", progress: 25 },
+    // { title: "Lose Weight", progress: 50 },
+    // { title: "Gain Strength", progress: 75 },
+    // { title: "Run 5k", progress: 25 },
   ];
 
   const recentActivities = [
@@ -78,6 +92,7 @@ const Dashboard = () => {
 
   return (
     <div style={styles.dashStyles} className="dashboard__container">
+
       <div style={styles.dashRight} className="dashboard__user">
         <Box sx={styles.boxStyles}>
           <img src={user.profilePicture} alt={user.name} />
@@ -94,7 +109,76 @@ const Dashboard = () => {
         </Box>
       </div>
 
+      {/* needs logic for handling */}
+      <div style={styles.dashRight} className="dashboard__user">
+        <Box sx={styles.boxStyles}>
+          <h1>Add A Goal</h1>
+        <form>
+
+        <input
+          className="form-input"
+          placeholder="Goal Title"
+          name="title"
+          type="text"
+          />
+
+        <br/>
+
+        <input
+          className="form-input"
+          placeholder="Goal Description"
+          name="description"
+          type="text"
+          />
+
+        <br/>
+
+        <button style={styles.buttonStyles} type="submit">
+          Add Goal
+        </button>
+      </form>
+        </Box>
+      </div>
+
+      {/* currently used for spacing, i didn't have time to properly format the page. */}
+      <div style={styles.dashRight} className="dashboard__user">
+      </div>
+
+
+      {/* needs logic for handling */}
+      <div style={styles.dashRight} className="dashboard__user">
+        <Box sx={styles.boxStyles}>
+          <h1>Add A Workout</h1>
+          <form>
+
+          <input
+          className="form-input"
+          placeholder="Workout Title"
+          name="title"
+          type="text"
+          />
+
+        <br/>
+
+        <input
+          className="form-input"
+          placeholder="Workout Description"
+          name="description"
+          type="text"
+          />
+
+        <br/>
+
+          <button style={styles.buttonStyles} type="submit">
+          Add Workout
+        </button>
+          </form>
+        </Box>
+      </div>
+      
+
       <div style={styles.dashRight}>
+
         <div style={styles.dashRightItems} className="dashboard__goals">
           <Box sx={styles.boxStyles}>
             <h2>Goals Progress</h2>

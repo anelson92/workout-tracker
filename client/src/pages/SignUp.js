@@ -125,6 +125,7 @@ const Signup = () => {
             type="text"
             value={formState.email}
             onChange={handleChange}
+            readOnly={false}
           />
         </label>
         <label>
@@ -134,6 +135,7 @@ const Signup = () => {
             type="text"
             value={formState.username}
             onChange={handleChange}
+            readOnly={false}
           />
         </label>
         <br />
@@ -144,6 +146,7 @@ const Signup = () => {
             type="password"
             value={formState.password}
             onChange={handleChange}
+            readOnly={false}
           />
         </label>
         <br />
