@@ -1,23 +1,12 @@
 // log in credentials
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useMutation } from 'react';
+
+import { LOGIN_USER } from '../utils/mutations'
+import Auth from '../utils/auth'
+
 
 const styles = {
-  formStyles: {
-    alignItems: "center",
-    flexWrap: "wrap",
-    width: "20%",
-    padding: "8px 15px",
-    margin: "auto",
-    marginTop: "50px",
-    display: "flex",
-    justifyContent: "space-around",
-    boxSizing: "borderBox",
-    border: "3px solid",
-    borderColor: "#1976d2",
-    borderRadius: "5px",
-    boxShadow: "0 0 5px 0",
-    backgroundColor: "white",
-  },
 
   inputStyles: {
     border: "1px solid",
@@ -47,17 +36,61 @@ const styles = {
   },
 };
 
-function Login(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const Login = () => {
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const [formState, setFormState] = useState({ username: "", password: "" });
+
+  console.log(formState);
+
+  const [login, { error }] = useMutation(LOGIN_USER);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();    
+    try {
+      const { data } = await login({
+        variables: formState,
+        headers: { authorization: Auth.getToken() }
+      });
+      Auth.login(data.login.token);
+
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
+
+// function Login(props) {
+//   const [username, setUsername] = useState("");
+//   const [password, setPassword] = useState("");
+
+//   const handleUsernameChange = (event) => {
+//     setUsername(event.target.value);
+//   };
+
+//   const handlePasswordChange = (event) => {
+//     setPassword(event.target.value);
+//   };
+
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+//     console.log(formState);
+
+//     try {
+//       const { data } = await addUser({
+//         variables: { ...formState },
+//       });
+//       Auth.login(data.addUser.token);
+//     } catch (e) {
+//       console.error(e);
+//     }
+//   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -67,14 +100,15 @@ function Login(props) {
 
   return (
     <div>
-      <form style={styles.formStyles} onSubmit={handleSubmit}>
+      <form style={styles.formStyles} onSubmit={handleFormSubmit}>
         <label>
           Username:
           <input
             style={styles.inputStyles}
             type="text"
-            value={username}
-            onChange={handleUsernameChange}
+            value={formState.username}
+            name="username"
+            onChange={handleChange}
           />
         </label>
         <br />
@@ -83,8 +117,9 @@ function Login(props) {
           <input
             style={styles.inputStyles}
             type="password"
-            value={password}
-            onChange={handlePasswordChange}
+            value={formState.password}
+            name="password"
+            onChange={handleChange}
           />
         </label>
         <br />
@@ -93,6 +128,7 @@ function Login(props) {
         </button>
       </form>
     </div>
+    
   );
 }
 

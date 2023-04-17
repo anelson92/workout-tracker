@@ -1,16 +1,57 @@
 // goals, workouts, *components for these*
 import React from "react";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+// import Button from "@mui/material/Button";
 import profilePic from "../assets/thisguy.jpg";
 import IconButton from "@mui/material/IconButton";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import "../styles/dashboard.css";
+
+import { useState } from 'react';
+import { useMutation } from 'react';
+import {ADD_GOAL} from '../utils/mutations';
+import {ADD_WORKOUT} from '../utils/mutations';
 
 const Dashboard = () => {
+
+  // const isLoggedIn = true;
+
+  // const [currentPage, setCurrentPage] = useState('Homepage');
+
+  // const handlePageChange = (page) => {
+  //   setCurrentPage(page);
+  //   console.log(page)
+  //   console.log(currentPage)
+  // }
+
+  // const renderPage = () => {
+  //   if(!isLoggedIn) {
+  //     return <Homepage></Homepage>
+  //   }
+  //   else {
+  //     return <Dashboard></Dashboard>
+  //   }
+  // }
+
+  // goal & workout handling
+  const [formState, setFormState] = useState()
+
+  const[ addWorkout, { error } ] = useMutation(ADD_WORKOUT);
+
+  const[ addGoal ] = useMutation(ADD_GOAL);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const styles = {
     dashStyles: {
       margin: "50px",
@@ -66,6 +107,20 @@ const Dashboard = () => {
     heroText: {
       maxWidth: "50%",
     },
+    buttonStyles: {
+      width: "50%",
+      color: "white",
+      background: "#1976d2",
+      textAlign: "center",
+      padding: "15px 0",
+      fontSize: "18px",
+      border: "1px solid",
+      borderColor: "black",
+      borderRadius: "10px",
+      mouseOver: {
+        background: "#blue",
+      }
+    }
   };
 
   const user = {
@@ -77,31 +132,40 @@ const Dashboard = () => {
   };
 
   const goals = [
-    { title: "Lose Weight", progress: 50 },
-    { title: "Gain Strength", progress: 75 },
-    { title: "Run 5k", progress: 25 },
+    // { title: "Lose Weight", progress: 50 },
+    // { title: "Gain Strength", progress: 75 },
+    // { title: "Run 5k", progress: 25 },
   ];
 
   const recentActivities = [
-    {
-      type: "Lifting",
-      exercise: "Bench Press",
-      sets: 3,
-      reps: 10,
-      weight: 100,
-    },
-    { type: "Running", exercise: "Treadmill", distance: 3, time: "25:00" },
-    { type: "Yoga", exercise: "Downward Dog", duration: 20 },
+    // {
+    //   type: "Lifting",
+    //   exercise: "Bench Press",
+    //   sets: 3,
+    //   reps: 10,
+    //   weight: 100,
+    // },
+    // { type: "Running", exercise: "Treadmill", distance: 3, time: "25:00" },
+    // { type: "Yoga", exercise: "Downward Dog", duration: 20 },
   ];
 
   const motivationalQuotes = [
     "The only bad workout is the one that didn't happen.",
     "Believe you can and you're halfway there.",
     "You don't have to be great to start, but you have to start to be great.",
+    "Opportunities don't happen, you create them.",
+    "It is never too late to be what you might have been.",
+    "Success is not final; failure is not fatal: It is the courage to continue that counts.",
+    "When we strive to become better than we are, everything around us becomes better too.",
+    "The most difficult thing is the decision to act, the rest is merely tenacity.",
+    "I am not a product of my circumstances. I am a product of my decisions.",
   ];
+  
 
   return (
+
     <div style={styles.dashStyles} className="dashboard__container">
+
       <div style={styles.dashRight} className="dashboard__user">
         <Box sx={styles.boxStyles}>
           <div style={styles.heroStyle}>
@@ -135,7 +199,80 @@ const Dashboard = () => {
         </Box>
       </div>
 
+   
+      <div style={styles.dashRight} className="dashboard__user">
+        <Box sx={styles.boxStyles}>
+          <h1>Add A Goal</h1>
+        <form>
+
+        <input
+          className="form-input"
+          placeholder="Goal Title"
+          name="title"
+          type="text"
+          onChange={handleChange}
+          />
+
+        <br/>
+
+        <input
+          className="form-input"
+          placeholder="Goal Description"
+          name="description"
+          type="text"
+          onChange={handleChange}
+          />
+
+        <br/>
+
+        <button style={styles.buttonStyles} type="submit">
+          Add Goal
+        </button>
+      </form>
+        </Box>
+      </div>
+
+      
+      <div style={styles.dashRight} className="dashboard__user">
+      </div>
+
+
+     
+      <div style={styles.dashRight} className="dashboard__user">
+        <Box sx={styles.boxStyles}>
+          <h1>Add A Workout</h1>
+          <form>
+
+          <input
+          className="form-input"
+          placeholder="Workout Title"
+          name="title"
+          type="text"
+          onChange={handleChange}
+          />
+
+        <br/>
+
+        <input
+          className="form-input"
+          placeholder="Workout Description"
+          name="description"
+          type="text"
+          onChange={handleChange}
+          />
+
+        <br/>
+
+          <button style={styles.buttonStyles} type="submit">
+          Add Workout
+        </button>
+          </form>
+        </Box>
+      </div>
+      
+
       <div style={styles.dashRight}>
+
         <div style={styles.dashRightItems} className="dashboard__goals">
           <Box sx={styles.boxStyles}>
             <h2>Goals Progress</h2>
@@ -207,7 +344,7 @@ const Dashboard = () => {
           </Box>
         </div>
       </div>
-    </div>
+     </div>
   );
 };
 
