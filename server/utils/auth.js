@@ -10,14 +10,12 @@ module.exports = {
 
     // We split the token string into an array and return actual token
     if (req.headers.authorization) {
-<<<<<<< HEAD
+
       token = token
       .split(' ')
       .pop()
       .trim(); 
-=======
-      token = token.split(' ').pop().trim();
->>>>>>> main
+
     }
 
     if (!token) {

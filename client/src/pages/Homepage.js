@@ -12,13 +12,10 @@ function HomePage() {
           programs.
         </p>
       </div>
-<<<<<<< HEAD
+
       <div className={styles['header-div-two']}>
         <p></p>
-=======
-      <div className={styles["header-div-two"]}>
-        <p>placeholder text lalalalalalalaalsadkl;jaslk;djas;ldkjasl;d</p>
->>>>>>> main
+
       </div>
 
     </div>

@@ -5,9 +5,16 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 // import Button from "@mui/material/Button";
+import profilePic from "../assets/thisguy.jpg";
+import IconButton from "@mui/material/IconButton";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
+
+import { useState } from 'react';
+import { useMutation } from 'react';
+import {ADD_GOAL} from '../utils/mutations';
+import {ADD_WORKOUT} from '../utils/mutations';
 
 const Dashboard = () => {
 
