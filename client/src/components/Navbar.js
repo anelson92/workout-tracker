@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-function Navbar() {
+function Navbar({isLoggedIn}) {
   const styles = {
     navStyles: {
       display: "flex",
@@ -57,9 +57,19 @@ function Navbar() {
         </Typography>
         <Box>
           <Link to={"/"}>Home</Link>
-          <Link to={"dashboard"}>Dashboard</Link>
-          <Link to={"login"}>Login</Link>
+          {isLoggedIn ? (
+            <>
+            <Link to={"dashboard"}>Dashboard</Link>
+            <Link to={"logout"}>Logout</Link>
+            </>            
+          ) : (
+            <>
+              <Link to={"login"}>Login</Link>
+              <Link to={"signup"}>Sign Up</Link>
+            </>
+          )}
         </Box>
+        
         {/* <Button color="inherit">Login</Button> */}
       </Toolbar>
     </AppBar>

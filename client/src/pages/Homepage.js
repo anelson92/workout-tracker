@@ -11,7 +11,7 @@ function HomePage() {
       <p>Get fit and healthy with our personalized workout plans and nutrition programs.</p>
       </div>
       <div className={styles['header-div-two']}>
-        <p>placeholder text lalalalalalalaalsadkl;jaslk;djas;ldkjasl;d</p>
+        <p></p>
       </div>
 
     </div>
