@@ -10,9 +10,8 @@ import IconButton from "@mui/material/IconButton";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-
 import { useState } from 'react';
-import { useMutation } from 'react';
+import { useMutation } from '@apollo/client';
 import {ADD_GOAL} from '../utils/mutations';
 import {ADD_WORKOUT} from '../utils/mutations';
 
