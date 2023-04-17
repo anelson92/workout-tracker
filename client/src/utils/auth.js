@@ -1,4 +1,5 @@
 import decode from 'jwt-decode';
+import axios from 'axios';
 
 class AuthService {
   getProfile() {
@@ -23,9 +24,10 @@ class AuthService {
     return localStorage.getItem('id_token');
   }
 
-  login(idToken) {
-    localStorage.setItem('id_token', idToken);
+  login(token) {
+    localStorage.setItem('id_token', token);
     window.location.assign('/');
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
 
   logout() {

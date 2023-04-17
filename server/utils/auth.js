@@ -12,7 +12,7 @@ module.exports = {
       token = token
       .split(' ')
       .pop()
-      .trim; 
+      .trim(); 
     }
     
     if (!token) {

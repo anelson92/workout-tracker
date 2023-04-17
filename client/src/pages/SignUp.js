@@ -1,6 +1,7 @@
 // log in credentials
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -67,22 +68,20 @@ const Signup = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
+  
+    setFormState((prevState) => ({
+      ...prevState,
       [name]: value,
-    });
+    }));
 
+    console.log(formState);
   };
 
-  const handleFormSubmit = async (event) => {
+  const handleSignupSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
 
     try {
-      const signUpEmail = document.getElementById('signup-email').value
-      const signUpUsername = document.getElementById('signup-username').value
-      const signUpPass = document.getElementById('signup-pass').value
       const { data } = await addUser({
         variables: { ...formState },
       });
@@ -91,6 +90,25 @@ const Signup = () => {
       console.error(e);
     }
   };
+
+
+
+  // const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+  //   console.log(formState);
+
+  //   try {
+  //     const signUpEmail = document.getElementById('signup-email').value
+  //     const signUpUsername = document.getElementById('signup-username').value
+  //     const signUpPass = document.getElementById('signup-pass').value
+  //     const { data } = await addUser({
+  //       variables: { ...formState },
+  //     });
+  //     Auth.login(data.addUser.token);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
 
 
 
@@ -120,16 +138,17 @@ const Signup = () => {
 
   return (
     <div>
-      <form style={styles.formStyles} onSubmit={handleFormSubmit}>
+      <form style={styles.formStyles} onSubmit={handleSignupSubmit}>
       <label>
           Email:
           <input
           id="signup-email"
             style={styles.inputStyles}
             type="text"
-            // value={formState.email}
+            value={formState.email}
+            name="email"
             onChange={handleChange}
-            readOnly={false}
+            
           />
         </label>
         <label>
@@ -138,9 +157,10 @@ const Signup = () => {
           id="signup-username"
             style={styles.inputStyles}
             type="text"
-            // value={formState.username}
+            value={formState.username}
+            name="username"
             onChange={handleChange}
-            readOnly={false}
+            
           />
         </label>
         <br />
@@ -150,9 +170,10 @@ const Signup = () => {
             id="signup-pass"
             style={styles.inputStyles}
             type="password"
-            // value={formState.password}
+            value={formState.password}
+            name="password"
             onChange={handleChange}
-            readOnly={false}
+            
           />
         </label>
         <br />
