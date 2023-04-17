@@ -72,6 +72,7 @@ const Signup = () => {
       ...formState,
       [name]: value,
     });
+
   };
 
   const handleFormSubmit = async (event) => {
@@ -79,10 +80,12 @@ const Signup = () => {
     console.log(formState);
 
     try {
+      const signUpEmail = document.getElementById('signup-email').value
+      const signUpUsername = document.getElementById('signup-username').value
+      const signUpPass = document.getElementById('signup-pass').value
       const { data } = await addUser({
         variables: { ...formState },
       });
-
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
@@ -121,9 +124,10 @@ const Signup = () => {
       <label>
           Email:
           <input
+          id="signup-email"
             style={styles.inputStyles}
             type="text"
-            value={formState.email}
+            // value={formState.email}
             onChange={handleChange}
             readOnly={false}
           />
@@ -131,9 +135,10 @@ const Signup = () => {
         <label>
           Username:
           <input
+          id="signup-username"
             style={styles.inputStyles}
             type="text"
-            value={formState.username}
+            // value={formState.username}
             onChange={handleChange}
             readOnly={false}
           />
@@ -142,9 +147,10 @@ const Signup = () => {
         <label>
           Password:
           <input
+            id="signup-pass"
             style={styles.inputStyles}
             type="password"
-            value={formState.password}
+            // value={formState.password}
             onChange={handleChange}
             readOnly={false}
           />

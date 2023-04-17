@@ -10,7 +10,8 @@ import Navbar from "./components/Navbar";
 import SignUp from "./pages/SignUp";
  
 const client = new ApolloClient({
-  uri: 'workout-tracker-5v11-7dnl01e9f-maxholzmann.vercel.app',
+  // not sure what to put for this value to get this connection to work
+  uri: '/graphql',
   cache: new InMemoryCache(),
 });
 
