@@ -5,8 +5,25 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Auth from '../utils/auth';
+import {LOGOUT} from '../utils/mutations'
+import { useMutation } from '@apollo/client';
 
 function Navbar({isLoggedIn}) {
+
+  const [logout, { error }] = useMutation(LOGOUT);
+
+  const logOutHandle = async (event) => {
+    try {
+      const { data } = await logout({
+        headers: { authorization: Auth.getToken() }
+      })
+      Auth.logout(data.token)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   const styles = {
     navStyles: {
       display: "flex",
@@ -86,15 +103,27 @@ function Navbar({isLoggedIn}) {
               textDecoration: "none",
             }}
           >
-            <Link style={styles.linkStyles} to={"/"}>
+
+          <Link style={styles.linkStyles} to={"/"}>
               Home
             </Link>
+           {Auth.loggedIn ? ( 
+            <>
             <Link style={styles.linkStyles} to={"dashboard"}>
               Dashboard
             </Link>
-            <Link style={styles.linkStyles} to={"login"}>
+            <Link style={styles.linkStyles} to={"/"} onClick={logOutHandle}>
+              Log Out
+            </Link>
+            </>
+           ) :  ( <><Link style={styles.linkStyles} to={"login"}>
               Login
             </Link>
+            <Link style={styles.linkStyles} to={"signup"}>
+              Sign Up
+            </Link>
+            </>
+            )}
           </Typography>
           </Box>
         
