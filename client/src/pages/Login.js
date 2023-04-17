@@ -47,7 +47,7 @@ const styles = {
   },
 };
 
-function Login() {
+function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -61,6 +61,7 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log('log button')
     // Handle login logic here, such as making an API call to authenticate user credentials
   };
 
