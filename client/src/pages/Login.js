@@ -38,7 +38,6 @@ const styles = {
 
 const Login = () => {
 
-
   const [formState, setFormState] = useState({ username: "", password: "" });
 
   console.log(formState);
@@ -93,6 +92,11 @@ const Login = () => {
 //     }
 //   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('log button')
+    // Handle login logic here, such as making an API call to authenticate user credentials
+  };
 
   return (
     <div>
