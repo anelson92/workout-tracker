@@ -33,16 +33,13 @@ const Login = () => {
 
 
   const [formState, setFormState] = useState({ username: "", password: "" });
- 
 
   console.log(formState);
 
   const [login, { error }] = useMutation(LOGIN_USER);
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    
+    event.preventDefault();    
     try {
       const { data } = await login({
         variables: formState,

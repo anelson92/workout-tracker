@@ -31,6 +31,8 @@ const Dashboard = () => {
   // }
 
   // goal & workout handling
+  const [formState, setFormState] = useState()
+
   const[ addWorkout, { error } ] = useMutation(ADD_WORKOUT);
 
   const[ addGoal ] = useMutation(ADD_GOAL);
@@ -157,8 +159,6 @@ const Dashboard = () => {
 
     <div style={styles.dashStyles} className="dashboard__container">
 
-{isLoggedIn ? (
-
       <div style={styles.dashRight} className="dashboard__user">
         <Box sx={styles.boxStyles}>
           <div style={styles.heroStyle}>
@@ -192,7 +192,7 @@ const Dashboard = () => {
         </Box>
       </div>
 
-      {/* needs logic for handling */}
+   
       <div style={styles.dashRight} className="dashboard__user">
         <Box sx={styles.boxStyles}>
           <h1>Add A Goal</h1>
@@ -225,12 +225,12 @@ const Dashboard = () => {
         </Box>
       </div>
 
-      {/* currently used for spacing, i didn't have time to properly format the page. */}
+      
       <div style={styles.dashRight} className="dashboard__user">
       </div>
 
 
-      {/* needs logic for handling */}
+     
       <div style={styles.dashRight} className="dashboard__user">
         <Box sx={styles.boxStyles}>
           <h1>Add A Workout</h1>
@@ -337,10 +337,7 @@ const Dashboard = () => {
           </Box>
         </div>
       </div>
-      ) : (
-
-      return <Homepage></Homepage>
-   
+     </div>
   );
 };
 
